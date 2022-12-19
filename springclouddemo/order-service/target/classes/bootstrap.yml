@@ -1,0 +1,25 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: ${ENV_PROFILE:dev}
+  application:
+    name: orderservice
+  cloud:
+    nacos:
+      config:
+        enabled: true
+        server-addr: ${NACOS_SERVER}
+        username: nacos
+        password: zxc111
+        file-extension: yaml
+        shared-configs:
+          - data-id: ${spring.application.name}.yaml
+            refresh: true
+          - data-id: ${spring.application.name}-${spring.profiles.active}.yaml
+            refresh: true
+      discovery:
+        enabled: true
+        server-addr: ${NACOS_SERVER}
+        username: nacos
+        password: zxc111
