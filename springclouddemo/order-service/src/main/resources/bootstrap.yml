@@ -14,9 +14,9 @@ spring:
         password: zxc111
         file-extension: yaml
         shared-configs:
-          - data-id: ${spring.application.name}.yaml
+          - data-id: application.yaml
             refresh: true
-          - data-id: ${spring.application.name}-${spring.profiles.active}.yaml
+          - data-id: application-${spring.profiles.active}.yaml
             refresh: true
       discovery:
         enabled: true

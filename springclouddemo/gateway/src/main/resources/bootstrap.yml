@@ -1,0 +1,40 @@
+server:
+  port: 5000
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
+  profiles:
+    active: ${ENV_PROFILE:dev}
+  application:
+    name: @project.artifactId@
+  cloud:
+    nacos:
+      config:
+        enabled: true
+        server-addr: ${NACOS_SERVER}
+        username: nacos
+        password: zxc111
+        file-extension: yaml
+        shared-configs:
+          - data-id: application.yaml
+            refresh: true
+          - data-id: application-${spring.profiles.active}.yaml
+            refresh: true
+      discovery:
+        enabled: true
+        server-addr: ${NACOS_SERVER}
+        username: nacos
+        password: zxc111
+    gateway:
+      discovery:
+          locator:
+            enabled: true
+            lower-case-service-id: true
+#      routes:
+#        - id: orderservice
+#          uri: lb://orderservice
+#          predicates:
+#            - Path=/orderservice/**
+#          filters:
+#            - StripPrefix=1

@@ -1,4 +1,4 @@
-package com.example.common.filters;
+package com.example.common.filter;
 
 import com.example.common.dto.ApiResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,18 +21,22 @@ public class ResponseFilter implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+
+        ServletServerHttpResponse currentResponse = ((ServletServerHttpResponse) response);
         //处理非200httpStatus的请求
-        if (((ServletServerHttpResponse) response).getServletResponse().getStatus() != 200) {
+        if (currentResponse.getServletResponse().getStatus() != 200) {
             return null;
         }
 
         //处理swagger请求资源
         String path = request.getURI().getPath();
-        if (path.equals("/swagger-resources")||path.equals("/v3/api-docs")) {
+        if (path.equals("/swagger-resources") || path.equals("/v3/api-docs")) {
             return body;
         }
 
         if (body instanceof ApiResult) {
+            Integer status = ((ApiResult<?>) body).getStatus();
+            currentResponse.getServletResponse().setStatus(status);
             return body;
         }
 
@@ -41,7 +45,7 @@ public class ResponseFilter implements ResponseBodyAdvice<Object> {
             ApiResult<Object> value = ApiResult.success(body);
 
             try {
-                response.getHeaders().set("Content-Type", "application/json; charset=utf-8");
+                currentResponse.getServletResponse().setContentType("application/json; charset=utf-8");
                 return new ObjectMapper().writeValueAsString(value);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();

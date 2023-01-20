@@ -30,11 +30,28 @@ public class ApiResult<T> {
                 .build();
     }
 
+    public static <T> ApiResult<T> fail(Integer status, String message, T data) {
+        return ApiResult.<T>builder()
+                .status(status)
+                .message(message)
+                .Data(data)
+                .build();
+    }
+
 
     public static <T> ApiResult<T> fail(String message) {
         return ApiResult.<T>builder()
                 .status(500)
                 .message(message)
+                .Data(null)
+                .build();
+    }
+
+    public static <T> ApiResult<T> fail(Exception ex) {
+        ex.printStackTrace();
+        return ApiResult.<T>builder()
+                .status(500)
+                .message(ex.getMessage())
                 .Data(null)
                 .build();
     }
