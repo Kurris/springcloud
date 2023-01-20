@@ -2,13 +2,11 @@ package com.example.common.filter;
 
 import com.example.common.dto.ApiResult;
 import com.example.common.dto.ValidationErrorDto;
+import com.example.common.exception.UnauthorizedException;
 import org.springframework.validation.BindException;
-import org.springframework.validation.DirectFieldBindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -28,4 +26,11 @@ public class ExceptionFilter {
                         .build())
                 .collect(Collectors.toList()));
     }
+
+    @ExceptionHandler(value = UnauthorizedException.class)
+    public ApiResult<Object> validationExceptionHandler(UnauthorizedException ex) {
+        return ApiResult.fail(ex.getCode(), ex.getMessage());
+    }
+
+
 }

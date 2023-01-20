@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import com.example.clients.UserClient;
+import com.example.common.annontaion.Authorize;
+import com.example.common.dto.CurrentUserInfo;
 import com.example.dto.AInputDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +20,20 @@ public class OrderController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private CurrentUserInfo currentUserInfo;
+
 //    @Autowired
 //    private UserClient userClient;
 
-    @Value("${name}")
-    private String name;
 //
 //    @Value("${name1}")
 //    private String name1;
 
+    @Authorize
     @GetMapping("/getName")
     public String getName(@Validated AInputDto input) {
-        return input.getName();
+
+        return input.getName() + "/" + currentUserInfo.getUserId();
     }
 }
