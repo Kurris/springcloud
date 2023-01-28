@@ -3,12 +3,18 @@ package com.example.controller;
 
 import com.example.common.annontaion.Authorize;
 import com.example.common.dto.CurrentUserInfo;
-import com.example.dto.AInputDto;
+import com.example.domain.dto.AInputDto;
+import com.example.domain.entity.TableNameEntity;
+import com.example.mapper.TableNameMapper;
+import com.example.service.TableNameService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 //import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -21,9 +27,16 @@ public class OrderController {
     @Autowired
     private CurrentUserInfo currentUserInfo;
 
-    @Authorize
+    @Autowired
+    private TableNameService tableNameService;
+
+    @Autowired
+    private TableNameMapper tableNameMapper;
+
+    //    @Authorize
     @GetMapping("/getName")
-    public String getName(@Validated AInputDto input) {
-        return input.getName() + "/" + currentUserInfo.getUserId();
+    public AInputDto getName(@Validated AInputDto input) {
+        AInputDto result = tableNameMapper.getJson(1);
+        return result;
     }
 }

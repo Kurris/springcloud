@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.TableNameMapper">
+
+    <resultMap id="listInteger" type="com.example.domain.dto.AInputDto">
+        <result column="json_col" property="jsonCol"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+    </resultMap>
+
+
+    <select id="getName" resultType="java.lang.String">
+        select name
+        from table_name
+        where id = #{id}
+    </select>
+
+    <select id="getJson" resultType="com.example.domain.dto.AInputDto" >
+        select id,name,json_col
+        from table_name
+        where id = #{id}
+    </select>
+
+</mapper>

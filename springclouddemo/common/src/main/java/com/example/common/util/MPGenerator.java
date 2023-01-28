@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 import com.example.common.database.dto.BaseEntity;
 import com.example.common.database.dto.abstraction.ITenantEntity;
@@ -20,7 +21,8 @@ public class MPGenerator {
      */
     public static void main(String[] args) {
 
-        FastAutoGenerator.create("jdbc:mysql://ip:port/database", "root", "password")
+        //jdbc:mysql://ip:port/database
+        FastAutoGenerator.create("jdbc:mysql://isawesome.cn:3306/demo", "root", "@zxc111")
                 .globalConfig(builder -> {
                     builder.author("ligy")
                             .dateType(DateType.ONLY_DATE)
@@ -35,7 +37,7 @@ public class MPGenerator {
                 })
                 .strategyConfig(builder -> {
                     StrategyConfig build = builder
-//                            .addInclude("t_app_table_task") // 设置需要生成的表名,注释掉为全部
+                            .addInclude("table_name") // 设置需要生成的表名,注释掉为全部
 //                            .addTablePrefix("t_app")
                             .build();// 设置过滤表前缀
                     // todo 注意 moduleName , superClass 的修改
@@ -46,17 +48,16 @@ public class MPGenerator {
                     // todo 生成字段映射
 //                    build.mapperBuilder().enableBaseResultMap().build();
                 })
-                .templateConfig(builder -> {
-                    builder.controller("/template/controller.java.vm");
-                    builder.entity("/template/entity.java.vm");
-                    builder.service("/template/service.java.vm");
-                    builder.serviceImpl("/template/serviceImpl.java.vm");
-                    builder.mapper("/template/mapper.java.vm");
-                    builder.xml("/template/mapper.xml.vm");
-                })
-                .templateEngine(new VelocityTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
+//                .templateConfig(builder -> {
+//                    builder.controller("/template/controller.java.vm");
+//                    builder.entity("/template/entity.java.vm");
+//                    builder.service("/template/service.java.vm");
+//                    builder.serviceImpl("/template/serviceImpl.java.vm");
+//                    builder.mapper("/template/mapper.java.vm");
+//                    builder.xml("/template/mapper.xml.vm");
+//                })
+                .templateEngine(new VelocityTemplateEngine())
                 .execute();
-
     }
 }
 
