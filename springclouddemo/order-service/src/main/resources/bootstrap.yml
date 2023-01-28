@@ -1,4 +1,3 @@
-
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -10,7 +9,7 @@ spring:
     nacos:
       config:
         enabled: true
-        server-addr: ${NACOS_SERVER}
+        server-addr: ${NACOS_SERVER:isawesome.cn:8848}
         username: nacos
         password: zxc111
         file-extension: yaml
@@ -21,7 +20,7 @@ spring:
             refresh: true
       discovery:
         enabled: true
-        server-addr: ${NACOS_SERVER}
+        server-addr: ${NACOS_SERVER:isawesome.cn:8848}
         username: nacos
         password: zxc111
 server:
