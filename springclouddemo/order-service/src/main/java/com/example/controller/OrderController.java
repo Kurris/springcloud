@@ -35,8 +35,9 @@ public class OrderController {
 
     //    @Authorize
     @GetMapping("/getName")
-    public AInputDto getName(@Validated AInputDto input) {
-        AInputDto result = tableNameMapper.getJson(1);
-        return result;
+    public TableNameEntity getName(@Validated AInputDto input) {
+        //tableNameMapper.deleteById(1);
+        TableNameEntity tableNameEntity = tableNameMapper.selectById(1);
+        return tableNameEntity;
     }
 }
