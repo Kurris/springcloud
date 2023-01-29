@@ -21,6 +21,7 @@
         <module>common</module>
         <module>gateway</module>
         <module>parent</module>
+        <module>ticket-service</module>
     </modules>
 
     <properties>

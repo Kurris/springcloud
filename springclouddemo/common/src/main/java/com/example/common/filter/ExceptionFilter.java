@@ -3,6 +3,7 @@ package com.example.common.filter;
 import com.example.common.dto.ApiResult;
 import com.example.common.dto.ValidationErrorDto;
 import com.example.common.exception.UnauthorizedException;
+import feign.FeignException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -16,6 +17,7 @@ public class ExceptionFilter {
     public ApiResult<Object> exceptionHandler(Exception ex) {
         return ApiResult.fail(ex);
     }
+
 
     @ExceptionHandler(value = BindException.class)
     public ApiResult<Object> validationExceptionHandler(BindException ex) {

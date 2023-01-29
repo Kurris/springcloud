@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @RestControllerAdvice
 public class ResponseFilter implements ResponseBodyAdvice<Object> {
+
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         return true;
@@ -40,7 +41,7 @@ public class ResponseFilter implements ResponseBodyAdvice<Object> {
             return body;
         }
 
-        if (body instanceof String) {
+        if (body instanceof String || body == null) {
 
             ApiResult<Object> value = ApiResult.success(body);
 

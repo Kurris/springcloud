@@ -39,8 +39,14 @@ spring:
           filters:
             - StripPrefix=1
         - id: order-service
-          uri: lb://order-service #lb:使用loadBalanceClient实现负载均衡，后面users是微服务的名称[应用于集群环境]
+          uri: lb://order-service
           predicates:
-            - Path=/orderService/** # 直接nginx80端口代理gateway,减少每一个配置,需要前端统一请求ip,gateway和nginx 80端口冲突,暂时先不改
+            - Path=/orderService/**
           filters:
             - StripPrefix=1
+        - id: ticket-service
+            uri: lb://ticket-service
+            predicates:
+              - Path=/ticketService/**
+            filters:
+              - StripPrefix=1
