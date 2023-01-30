@@ -22,7 +22,23 @@ spring:
             "data": null
           }'
       eager: true
-
+      datasource:
+        flow:
+          nacos:
+#            namespace: public
+            server-addr: ${NACOS_SERVER:isawesome.cn:8848}
+            #限流规则配置文件的名称
+            dataId: sentinel-flow-rules
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule-type: flow
+        degrade:
+          nacos:
+            server-addr: ${NACOS_SERVER:isawesome.cn:8848}
+            dataId: sentinel-degrade-rules
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule-type: degrade
     nacos:
       config:
         enabled: true
