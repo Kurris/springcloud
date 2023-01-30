@@ -7,8 +7,22 @@ spring:
   profiles:
     active: ${ENV_PROFILE:dev}
   application:
-    name: '@project.artifactId@'
+    name: gateway
   cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      scg:
+        fallback:
+          mode: response
+          response-status: 426
+          response-body: '{
+            "status": 426,
+            "message": "请求被禁止",
+            "data": null
+          }'
+      eager: true
+
     nacos:
       config:
         enabled: true
@@ -45,8 +59,8 @@ spring:
           filters:
             - StripPrefix=1
         - id: ticket-service
-            uri: lb://ticket-service
-            predicates:
-              - Path=/ticketService/**
-            filters:
-              - StripPrefix=1
+          uri: lb://ticket-service
+          predicates:
+            - Path=/ticketService/**
+          filters:
+            - StripPrefix=1
