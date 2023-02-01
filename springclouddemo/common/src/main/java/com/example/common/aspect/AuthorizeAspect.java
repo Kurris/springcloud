@@ -1,6 +1,5 @@
 package com.example.common.aspect;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.auth0.jwk.GuavaCachedJwkProvider;
 import com.auth0.jwk.Jwk;
 import com.auth0.jwk.JwkProvider;
@@ -34,14 +33,12 @@ import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPublicKey;
-import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Order(1)
 @Aspect
 @Component
-public class AuthorizeAdvice {
+public class AuthorizeAspect {
 
     @Autowired
     private CurrentUserInfo currentUserInfo;

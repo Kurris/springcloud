@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TicketController {
 
-//    @Authorize
+    //@Authorize
     @GetMapping("/ticket/value")
     public String getValue(@RequestParam(required = false) String value) {
         return value;
     }
-
 }

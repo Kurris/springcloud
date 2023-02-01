@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class FeignAdvice {
+public class FeignAspect {
     @Pointcut("@within(org.springframework.cloud.openfeign.FeignClient)")
     public void pointCut() {
     }

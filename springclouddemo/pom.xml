@@ -22,6 +22,7 @@
         <module>gateway</module>
         <module>parent</module>
         <module>ticket-service</module>
+        <module>ticket-service-api</module>
     </modules>
 
     <properties>
@@ -50,6 +51,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
