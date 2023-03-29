@@ -1,5 +1,5 @@
 server:
-  port: 5000
+  port: 8080
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -11,7 +11,7 @@ spring:
   cloud:
     sentinel:
       transport:
-        dashboard: localhost:8080
+        dashboard: ${SENTINEL_ADDRESS:localhost:8080}
       scg:
         fallback:
           mode: response
@@ -26,7 +26,7 @@ spring:
         flow:
           nacos:
 #            namespace: public
-            server-addr: ${NACOS_SERVER:isawesome.cn:8848}
+            server-addr: ${NACOS_ADDRESS}
             #限流规则配置文件的名称
             dataId: sentinel-flow-rules
             groupId: SENTINEL_GROUP
@@ -34,7 +34,7 @@ spring:
             rule-type: flow
         degrade:
           nacos:
-            server-addr: ${NACOS_SERVER:isawesome.cn:8848}
+            server-addr: ${NACOS_ADDRESS}
             dataId: sentinel-degrade-rules
             groupId: SENTINEL_GROUP
             data-type: json
@@ -42,9 +42,9 @@ spring:
     nacos:
       config:
         enabled: true
-        server-addr: ${NACOS_SERVER:isawesome.cn:8848}
-        username: nacos
-        password: zxc111
+        server-addr: ${NACOS_ADDRESS}
+        username: ${NACOS_USER}
+        password: ${NACOS_PASSWORD}
         file-extension: yaml
         shared-configs:
           - data-id: application.yaml
@@ -53,9 +53,9 @@ spring:
             refresh: true
       discovery:
         enabled: true
-        server-addr: ${NACOS_SERVER:isawesome.cn:8848}
-        username: nacos
-        password: zxc111
+        server-addr: ${NACOS_ADDRESS}
+        username: ${NACOS_USER}
+        password: ${NACOS_PASSWORD}
     gateway: #可以放在nacos中做动态配置
       discovery:
         locator:

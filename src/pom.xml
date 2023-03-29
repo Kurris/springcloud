@@ -17,12 +17,11 @@
     </parent>
 
     <modules>
-        <module>order-service</module>
         <module>common</module>
         <module>gateway</module>
-        <module>parent</module>
-        <module>ticket-service</module>
-        <module>ticket-service-api</module>
+        <module>order/order-service</module>
+        <module>ticket/ticket-service</module>
+        <module>ticket/ticket-service-api</module>
     </modules>
 
     <properties>
@@ -117,4 +116,36 @@
             <classifier>osx-aarch_64</classifier>
         </dependency>
     </dependencies>
+
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/application*.yml</include>
+                    <include>**/application*.yaml</include>
+                    <include>**/application*.properties</include>
+                    <include>**/bootstrap*.yml</include>
+                    <include>**/bootstrap*.yaml</include>
+                    <include>**/bootstrap*.properties</include>
+                    <include>**/logback*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <excludes>
+                    <exclude>**/application*.yml</exclude>
+                    <exclude>**/application*.yaml</exclude>
+                    <exclude>**/application*.properties</exclude>
+                    <exclude>**/bootstrap*.yml</exclude>
+                    <exclude>**/bootstrap*.yaml</exclude>
+                    <exclude>**/bootstrap*.properties</exclude>
+                    <exclude>**/logback*.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
 </project>
